@@ -7,9 +7,9 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const blogsRouter = require('./routes/blogs');
-const undefinedRouter = require('./routes/undefined');
+const notfoundRouter = require('./routes/notfound');
 
-const db = require('./db/dataDb.js');
+// const db = require('./db/dataDb.js');
 
 const app = express();
 
@@ -21,14 +21,16 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/blogs', blogsRouter);
-app.use('*', undefinedRouter);
+app.use('*', notfoundRouter);
 
 
 
@@ -38,7 +40,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res, _next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
