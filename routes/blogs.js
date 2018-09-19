@@ -9,7 +9,7 @@ const Helper = require('./helper');
 /* GET home page. */
 
 
-router.get('/', (_req, res, _next) => {
+router.get('/', (req, res, _next) => {
 
   res.json(db.blogs);
 });
@@ -33,7 +33,7 @@ router.get('/:blogId', (req, res, _next) => {
   const index = db.blogsId.indexOf(req.params.blogId);
 
   if (index === -1) {
-    res.redirect('/notfound');
+    res.redirect('/');
   }
 
   res.json(db.blogs[index]);

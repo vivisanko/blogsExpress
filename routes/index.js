@@ -5,7 +5,9 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', (req, res, _next) => {
   res.render('index', {
-    title: 'welcome page! Добро пожаловать!'
+    title: 'Добро пожаловать!',
+    about: 'Блог MyDevJS Майи Девовны Джаваскриптовской',
+    tagline: 'Даже Боги читают блоги!'
   });
 });
 
